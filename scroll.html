@@ -1,0 +1,470 @@
+<!DOCTYPE html>
+<html>
+  <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+<head>
+  <link rel="stylesheet" href="font-awesome/css/font-awesome.min.css"  >
+<title>MaY Stories</title>
+</head>
+<style>
+/*checkbox*/
+.switch {
+  position: relative;
+  display: inline-block;
+  width: 30px;
+  height: 17px;
+}
+
+.switch input { 
+  opacity: 0;
+  width: 0;
+  height: 0;
+}
+
+.slider {
+  position: absolute;
+  cursor: pointer;
+  top: 0;
+  left: 0;
+  right: 0;
+  bottom: 0;
+  background-color: #ccc;
+  -webkit-transition: .4s;
+  transition: .4s;
+}
+
+.slider:before {
+  position: absolute;
+  content: "";
+  height: 14px;
+  width: 14px;
+  left: 2px;
+  bottom: 2px;
+  background-color: white;
+  -webkit-transition: .4s;
+  transition: .4s;
+}
+
+input:checked + .slider {
+  background-color: #2196F3;
+}
+
+input:focus + .slider {
+  box-shadow: 0 0 1px #2196F3;
+}
+
+input:checked + .slider:before {
+  -webkit-transform: translateX(26px);
+  -ms-transform: translateX(26px);
+  transform: translateX(12px);
+}
+
+/* Rounded sliders */
+.slider.round {
+  border-radius: 34px;
+}
+
+.slider.round:before {
+  border-radius: 50%;
+}
+/*over*/
+.menu {
+position:fixed;
+z-index:9;
+
+}
+.fa-bars {
+font-size:40px;
+color:white;
+right:20px;
+position:fixed;
+text-shadow:#3DFFFD 0PX 2PX 2px,#00A3A1 0PX 2PX 5px ;
+}
+@font-face{
+
+font-family:love;
+src:url(loveFont.ttf);
+}
+*{margin:0; padding:0; box-sizing:border-box;}
+.stories {
+scroll-snap-points-y: repeat(300px);
+width:100%;
+height:100vh;
+overflow:scroll;
+overflow-x:hidden;
+position:relative;
+scroll-behavior:smooth;
+scroll-snap-type:y mandatory;
+}
+
+.section {
+
+color:white;
+background:rgba(0,0,0,0.6);
+overflow:hidden;
+position:relative;
+width:100vw;
+background-size:cover;
+
+padding:6px;
+height:100vh;
+scroll-snap-align:start;
+border:10px soild red;
+background-position: center;
+  background-repeat: no-repeat;
+
+
+
+  
+/*background-image:url("BG.jpeg");*/
+animation:color 30s linear infinite;
+}
+.dark {
+background:none;
+position:absolute;
+left:0;
+top:0;
+background:none;
+width:100%;
+height:100%;
+
+
+}
+.section::after{
+overflow:hidden;
+content:'';
+position:absolute;
+width:100vw;
+height:8px;
+left:0;
+bottom:-4px;
+background:white;
+}
+
+
+
+
+
+
+
+::-webkit-scrollbar{
+background:black;
+width:8px;
+
+}
+::-webkit-scrollbar-thumb{
+border-radius:9px;
+width:18px;
+height:10%;
+background:linear-gradient(to top, #008eff, #00ffe7);
+animation:color 0s linear infinite;
+
+}
+::-webkit-scrollbar-track{
+
+border:1PX solid white;
+
+}
+/*#scrollprogress {
+width:18px;
+height:10%;
+position:fixed;
+top:0;
+right:0;
+background:linear-gradient(to top, #008eff, #00ffe7);
+animation:color 5s linear infinite;
+
+
+}*/
+@keyframes color{
+
+0%{filter:hue-rotate(0deg);}
+100%{filter:hue-rotate(0deg);}
+}
+.section  p{
+/*font-family:love;
+font-size:50px;*/
+position:fixed;
+bottom:0px;
+font-weight:bold;
+background:rgba(255,255,255,0.7);
+color:black;
+font-size:20px;
+width:70%;
+z-index:9;
+padding:10px 15px;
+margin:14PX 12px;
+/*background:rgba(0,0,0,0.6);
+color:white;*/
+
+}
+.like_p {
+position:fixed;
+height:100vh;
+width:100vw;
+top:0;
+z-index:9;
+left:0;
+background:rgba(0,0,0,.6);
+display:none;
+justify-content:center;
+align-items:center;
+}
+#like {
+animation:like 0.5s linear 1;
+height:90px;
+width:80px;
+top:0;
+z-index:9;
+left:0;
+transition:1s;
+}
+@keyframes like{
+
+0%{margin-bottom:0; height:80px; width:70px;}
+20%{transform:rotate(20deg);}
+60%{transform:rotate(-20deg);}
+100%{margin-bottom:100px;height:90px;width:80px;}
+}
+.menu_list {
+
+position:fixed;
+top:40px;
+background:rgba(0,0,0,0.5);
+padding:10PX 6px;
+display:none;
+color:white;
+right:20px;
+animation:zoom 0.4s  1 linear;
+}
+@keyframes zoom{
+0%{
+font-size:0px;
+}
+100%{
+font-size:18px;
+}
+}
+.share {
+position:absolute;
+height:100%;
+width:100%;
+top:0;
+right:0;
+z-index:99;
+}
+.fa-share-alt {
+position:fixed;
+color:white;
+right:20px;
+font-size:40px;
+top:50%;
+}
+.menu:hover .menu_list  {display:block;}
+</style>
+<body onload="getQuotes()">
+<div class="menu">
+	<i class="fa fa-bars" aria-hidden="true"></i>  
+	
+<div class="menu_list" >
+
+	<h3> Dark mode &nbsp;<label class="switch">
+	<input type="checkbox" id="dark_mode" value="" >
+	<span class="slider round"></span>
+	</label>
+	</h3>
+</div>
+</div>
+
+<div class="stories" ondblclick="like()">
+<div class="share" ><i class="fa fa-share-alt" aria-hidden="true"></i></div>
+<!--for like-->
+<div class="like_p">
+<img src="img/like.png" id="like" >
+</div>
+
+	<div class="section" ><div class="dark" ><p class="content" >"Loading"</p></div></div>
+	<div class="section" ><div class="dark" ><p class="content" >"Loading"</p></div></div>
+	<div class="section" ><div class="dark" ><p class="content" >"Loading"</p></div></div>
+	<div class="section" ><div class="dark" ><p class="content" >"Loading"</p></div></div>
+	<div class="section" ><div class="dark" ><p class="content" >"Loading"</p></div></div>
+	<div class="section" ><div class="dark" ><p class="content" >"Loading"</p></div></div>
+	<div class="section" ><div class="dark" ><p class="content" >"Loading"</p></div></div>
+	<div class="section" ><div class="dark" ><p class="content" >"Loading"</p></div></div>
+	<div class="section" ><div class="dark" ><p class="content" >"Loading"</p></div></div>
+	<div class="section" ><div class="dark" ><p class="content" >"Loading"</p></div></div>
+	<div class="section" ><div class="dark" ><p class="content" >"Loading"</p></div></div>
+	<div class="section" ><div class="dark" ><p class="content" >"Loading"</p></div></div>
+	<div class="section" ><div class="dark" ><p class="content" >"Loading"</p></div></div>
+	<div class="section" ><div class="dark" ><p class="content" >"Loading"</p></div></div>
+	<div class="section" ><div class="dark" ><p class="content" >"Loading"</p></div></div>
+	<div class="section" ><div class="dark" ><p class="content" >"Loading"</p></div></div>
+	<div class="section" ><div class="dark" ><p class="content" >"Loading"</p></div></div>
+	<div class="section" ><div class="dark" ><p class="content" >"Loading"</p></div></div>
+	<div class="section" ><div class="dark" ><p class="content" >"Loading"</p></div></div>
+	<div class="section" ><div class="dark" ><p class="content" >"Loading"</p></div></div>
+	<div class="section" ><div class="dark" ><p class="content" >"Loading"</p></div></div>
+	<div class="section" ><div class="dark" ><p class="content" >"Loading"</p></div></div>
+	<div class="section" ><div class="dark" ><p class="content" >"Loading"</p></div></div>
+	<div class="section" ><div class="dark" ><p class="content" >"Loading"</p></div></div>
+	<div class="section" ><div class="dark" ><p class="content" >"Loading"</p></div></div>
+	<div class="section" ><div class="dark" ><p class="content" >"Loading"</p></div></div>
+	<div class="section" ><div class="dark" ><p class="content" >"Loading"</p></div></div>
+	<div class="section" ><div class="dark" ><p class="content" >"Loading"</p></div></div>
+	<div class="section" ><div class="dark" ><p class="content" >"Loading"</p></div></div>
+	<div class="section" ><div class="dark" ><p class="content" >"Loading"</p></div></div>
+	<div class="section" ><div class="dark" ><p class="content" >"Loading"</p></div></div>
+	<div class="section" ><div class="dark" ><p class="content" >"Loading"</p></div></div>
+	<div class="section" ><div class="dark" ><p class="content" >"Loading"</p></div></div>
+	<div class="section" ><div class="dark" ><p class="content" >"Loading"</p></div></div>
+	<div class="section" ><div class="dark" ><p class="content" >"Loading"</p></div></div>
+	<div class="section" ><div class="dark" ><p class="content" >"Loading"</p></div></div>
+<div class="section" ><div class="dark" ><p class="content" >"Loading"</p></div></div>
+<div class="section" ><div class="dark" ><p class="content" >"Loading"</p></div></div>
+<div class="section" ><div class="dark" ><p class="content" >"Loading"</p></div></div>
+<div class="section" ><div class="dark" ><p class="content" >"Loading"</p></div></div>
+<div class="section" ><div class="dark" ><p class="content" >"Loading"</p></div></div>
+<div class="section" ><div class="dark" ><p class="content" >"Loading"</p></div></div>
+<div class="section" ><div class="dark" ><p class="content" >"Loading"</p></div></div>
+<div class="section" ><div class="dark" ><p class="content" >"Loading"</p></div></div>
+<div class="section" ><div class="dark" ><p class="content" >"Loading"</p></div></div>
+<div class="section" ><div class="dark" ><p class="content" >"Loading"</p></div></div>
+<div class="section" ><div class="dark" ><p class="content" >"Loading"</p></div></div>
+<div class="section" ><div class="dark" ><p class="content" >"Loading"</p></div></div>
+<div class="section" ><div class="dark" ><p class="content" >"Loading"</p></div></div>
+<div class="section" ><div class="dark" ><p class="content" >"Loading"</p></div></div>
+<div class="section" ><div class="dark" ><p class="content" >"Loading"</p></div></div>
+
+
+
+
+	
+	
+	
+	<!--<div class="section" ><p></p></div>-->
+	<div class="section" ><div class="dark" ><p class="content">coming soon</p></div></div>
+</div>
+</div>
+</body>
+<script type="text/javascript">
+
+ randomQuotes= Math.floor(Math.random()*1100);
+ var dark= document.getElementsByClassName("dark");
+dark_mode=document.getElementById("dark_mode");
+section =document.getElementsByClassName("section");
+darkmode_status=false;
+ var content=document.getElementsByClassName("content");
+dark_mode.addEventListener('click',()=>{
+
+if(darkmode_status==false){
+darkmode_status=true;
+}
+else{
+darkmode_status=false;
+}
+console.log(darkmode_status);
+});
+setInterval(()=>{
+
+if(darkmode_status==true){
+var dark= document.getElementsByClassName("dark");
+var content=document.getElementsByClassName("content");
+var i;
+for(i=0; i<dark.length; i++){
+dark[i].style.backgroundColor="rgba(0,0,0,0.3)";
+content[i].style.background="rgba(0,0,0,0.6)";
+content[i].style.color="white";
+}
+}
+
+else{
+var dark= document.getElementsByClassName("dark");
+var content=document.getElementsByClassName("content");
+var i;
+for(i=0; i<dark.length; i++){
+dark[i].style.background="transparent";
+content[i].style.background="rgba(255,255,255,0.6)";
+
+content[i].style.color="black";
+}
+}
+}
+,10);
+
+document.addEventListener("click", ()=>{
+var elem = document.documentElement;
+  if (elem.requestFullscreen) {
+  elem.requestFullscreen();
+  } else if (elem.mozRequestFullScreen) { 
+  elem.mozRequestFullScreen();
+  } else if (elem.webkitRequestFullscreen) { 
+  elem.webkitRequestFullscreen();
+  } else if (elem.msRequestFullscreen) { 
+  elem.msRequestFullscreen();}
+});
+
+
+function like(){
+
+document.querySelector(".like_p").style.display="flex";
+setTimeout(()=>{document.querySelector(".like_p").style.display="none";
+
+
+}
+
+,500);
+
+}
+
+</script>
+<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.14.7/umd/popper.min.js"
+    integrity="sha384-UO2eT0CpHqdSJQ6hJty5KVphtPhzWj9WO1clHTMGa3JDZwrnQq4sF86dIHNDz0W1"
+    crossorigin="anonymous"></script>
+<script >
+
+
+
+
+
+
+ 
+ 
+ 
+ 
+
+ 
+ let realdata;
+const getQuotes = async() =>{
+var content=document.getElementsByClassName("content");
+
+ try {
+ let data= await fetch("https://type.fit/api/quotes");
+ realdata= await data.json();
+ 
+ console.log(realdata.length);
+for(i=0;i<90;i++){
+ var content=document.getElementsByClassName("content");
+ randomBg= Math.floor(Math.random()*5+1);
+ section[i].style.background="url(IMG/bg"+randomBg+".jpg)";
+ randomQuotes= Math.floor(Math.random()*1643);
+section[i].style.backgroundPosition="center";
+section[i].style.backgroundAttachment="Fixed";
+section[i].style.backgroundSize="cover";
+content[i].innerHTML= '"'+realdata[randomQuotes].text+'"';
+
+ }
+ }
+ catch(Error){}
+
+};
+
+document.querySelector(".fa-share-alt").addEventListener("click",()=>{
+;
+randomcont=Math.floor(Math.random()*50);
+quote= realdata[randomcont].text;
+console.log(`${realdata[randomcont].text}`);
+
+location.replace("https://wa.me/?text=*Today's%20Quote:~* %0a"+'"'+quote+'"'+"%0a *Shared%20By%20QuoteTudy*");
+});
+</script>
+</html>
